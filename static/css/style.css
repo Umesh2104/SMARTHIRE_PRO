@@ -692,4 +692,20 @@ body.dark-mode .feedback-pre {
     border-radius: 0 8px 8px 0;
     padding: 14px 16px;
     color: #e0e0e0;
+
+}
+body.dark-mode .card-title,
+body.dark-mode .card-text,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode label,
+body.dark-mode span,
+body.dark-mode td,
+body.dark-mode th {
+    color: #457acf;
 }
