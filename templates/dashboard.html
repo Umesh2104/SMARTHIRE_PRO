@@ -1,0 +1,204 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+
+<!-- Stats Cards -->
+<div class="row g-4 mb-5">
+    {% if role == 'admin' %}
+    <div class="col-md-4">
+        <div class="card text-white bg-primary shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Total Candidates</h6>
+                        <h2 class="mb-0">{{ stats.total_candidates }}</h2>
+                    </div>
+                    <i class="fas fa-users fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-success shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Total Interviews</h6>
+                        <h2 class="mb-0">{{ stats.total_interviews }}</h2>
+                    </div>
+                    <i class="fas fa-calendar-check fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-white bg-info shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Average Score</h6>
+                        <h2 class="mb-0">{{ stats.avg_score }}%</h2>
+                    </div>
+                    <i class="fas fa-chart-bar fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <!-- Candidate stats -->
+    <div class="col-md-6">
+        <div class="card text-white bg-primary shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Your Interviews</h6>
+                        <h2 class="mb-0">{{ stats.total_interviews }}</h2>
+                    </div>
+                    <i class="fas fa-user-tie fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-success shadow">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="card-title">Average Score</h6>
+                        <h2 class="mb-0">{{ stats.avg_score }}%</h2>
+                    </div>
+                    <i class="fas fa-star fa-3x opacity-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% if role == 'candidate' %}
+<!-- Resume Upload & Start Interview -->
+<div class="row">
+    <div class="col-md-6">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Upload Resume (PDF)</h5>
+            </div>
+            <div class="card-body">
+                <form action="{{ url_for('upload_resume') }}" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="resume" class="form-label">Choose PDF</label>
+                        <input class="form-control" type="file" id="resume" name="resume" accept=".pdf" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+                {% if candidate.skills %}
+                <hr>
+                <h6>Detected Skills:</h6>
+                <div>
+                    {% for skill in candidate.skills %}
+                    <span class="badge bg-secondary me-1">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Start New Interview</h5>
+            </div>
+            <div class="card-body">
+                {% if candidate.skills %}
+                <form action="{{ url_for('start_interview') }}" method="POST">
+                    <div class="mb-3">
+                        <label class="form-label">Interview Type</label>
+                        <select class="form-select" name="interview_type">
+                            <option value="technical">Technical</option>
+                            <option value="management">Management</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Number of Questions</label>
+                        <div class="d-flex gap-3 flex-wrap mt-1">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="question_count" id="q5" value="5">
+                                <label class="form-check-label" for="q5">5 &nbsp;<small class="text-muted">(Quick ~15
+                                        min)</small></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="question_count" id="q10" value="10"
+                                    checked>
+                                <label class="form-check-label" for="q10">10 &nbsp;<small
+                                        class="text-muted">(Recommended ~30 min)</small></label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="question_count" id="q15" value="15">
+                                <label class="form-check-label" for="q15">15 &nbsp;<small class="text-muted">(Intensive
+                                        ~45 min)</small></label>
+                            </div>
+                        </div>
+                        <small class="text-muted">3 minutes allowed per question.</small>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-play me-2"></i>Begin Interview
+                    </button>
+                </form>
+                {% else %}
+                <p class="text-muted">Please upload your resume first to start an interview.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Past Interviews -->
+{% if candidate.interviews %}
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card shadow">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">Your Interview History</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Score</th>
+                                <th>Result</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for iv in candidate.interviews|reverse %}
+                            <tr>
+                                <td>{{ iv.date[:10] }}</td>
+                                <td>{{ iv.type|capitalize }}</td>
+                                <td>{{ iv.scores.overall }}%</td>
+                                <td>
+                                    <span
+                                        class="badge {% if iv.result == 'selected' %}bg-success{% else %}bg-danger{% endif %}">
+                                        {{ iv.result|capitalize }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('results', interview_id=iv.id) }}"
+                                        class="btn btn-sm btn-outline-primary">View</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+{% endif %}
+{% endblock %}

@@ -1,0 +1,257 @@
+{
+  "users": {
+    "d34b4796-2618-452c-ba3d-6d0e69296e0b": {
+      "id": "d34b4796-2618-452c-ba3d-6d0e69296e0b",
+      "name": "umesh",
+      "email": "umesh@example.com",
+      "password_hash": "pbkdf2:sha256:600000$4dIN1M7dVYtgyfNG$632001694d7f7e1430948894bf77594cc62dec3e73f674b2f572b9c62a137bd4",
+      "role": "candidate",
+      "created_at": "2026-02-23T16:41:59.277604"
+    }
+  },
+  "candidates": {
+    "d34b4796-2618-452c-ba3d-6d0e69296e0b": {
+      "user_id": "d34b4796-2618-452c-ba3d-6d0e69296e0b",
+      "resume_text": "CONTACT\nSOFT SKILLS\nLANGUAGES\nPROFILE\n+91 7671012257Phone:\nvulapu.umeshchandra@gmail.co\nmEmail Address:\nGidalur, Andhra PradeshAddress:\nTECH SKILLS\nhttps://www.linkedin.com/in/umes\nh-chandra-a33353327Website\nTeamwork\nTime Management\nLeadership\nCommunication\nCritical Thinking\nProblem Solving \nPresentation Skills\nEnglish \nTelugu\nKannada (Intermediate)\nHindi (Basics)VULAPU UM ESH CHANDRA\nBCA STUDENT | ASPIRING JAVA DEVELOPER\nEDUCATIONCreative and detail-oriented BCA 3 year student passionate to obtain an\nentry-level position as a Java Developer where I can apply my knowledge of\nCore Java, Object-Oriented Programming, and Data Structures and\ncontribute to the organization\u2019s growth. Eager to learn and develop real-\nworld projects within the company, while continuously enhancing my\ntechnical expertise and problem-solving skills.rd\n2023 - 2026 Bachelor of Computer Application\nNagarjuna College of Management Studies \n2019 - 2021 Aditya Junior College\nPU\nP E R C E N T A G E :C P A : 9.61/ 10.0\nJava (Expert)\nPython (Intermediate)\nC(Intermediate)\nData Structures\nAlgorithms\nSQL, MySQL\nHTML , CSS & Javascript\n(Basics)LEARNING & TRAINING\nCurrently Learning on DSA Fundamentals\nACHIEVEMENTS & HACKATHONS\nSecured 1 place with team in internal hackathon conducted Nagarjuna\nCollege of Management Studies.st\nWon First Prize Twice in Quiz which are held at Intercollege Fest at SJCIT\nand ONESB College.\nPublished an Article titled \u201cFeminist Theory And Activism: A Path Towards\nEquality\u201d in \u201cBhasha Sampada-II\u201d.97%\nLearning on Spring Boot and Cloud Technologies\nto become Java Developer or Full Stack\nDeveloper\nHOBBIESParticipated in one day conference held at S.E.A College of Science,\nCommerce and Arts on topic of \u201cBlockchain and Cryptocurrency\u201d .\nFitness Training \nListening Music\nWatching Movies",
+      "skills": [
+        "problem solving",
+        "java",
+        "leadership",
+        "spring",
+        "python",
+        "javascript",
+        "communication",
+        "html",
+        "css",
+        "sql",
+        "teamwork"
+      ],
+      "interviews": [
+        {
+          "id": "ae01e347-44b2-4894-ae30-ec11bc82c850",
+          "date": "2026-02-23T16:44:04.324382",
+          "type": "technical",
+          "questions": [
+            {
+              "question": "Describe a project where you used css extensively.",
+              "answer": "jgnodnginas",
+              "score": 0
+            },
+            {
+              "question": "Explain what spring is and give a real\u2011world use case.",
+              "answer": "jbgrozgerhv",
+              "score": 0
+            },
+            {
+              "question": "How would you troubleshoot a problem related to css?",
+              "answer": "rbguikerdjoeigldpgedf;l",
+              "score": 0
+            },
+            {
+              "question": "Explain what python is and give a real\u2011world use case.",
+              "answer": "jfvihz9p0gi[dbkply",
+              "score": 0
+            },
+            {
+              "question": "Explain what css is and give a real\u2011world use case.",
+              "answer": "",
+              "score": 0
+            }
+          ],
+          "scores": {
+            "technical": 0.0,
+            "communication": 8.0,
+            "overall": 4.0
+          },
+          "result": "rejected",
+          "feedback": "Strengths: None identified. Weaknesses: Technical concepts need improvement, Answers could be more elaborate. Q1: Score 0% (technical) / 10% (communication). Q2: Score 0% (technical) / 10% (communication). Q3: Score 0% (technical) / 10% (communication). Q4: Score 0% (technical) / 10% (communication). Q5: No answer provided."
+        },
+        {
+          "id": "0e57fb87-9558-41b0-9527-70aa7bdb043a",
+          "date": "2026-02-23T16:46:53.753066",
+          "type": "management",
+          "questions": [
+            {
+              "question": "How do you handle conflicts within your team?",
+              "answer": "first of all i would recommend for all of them who are involved in conflict that try to be in calm i will take intiative and a organize a meeting where maximum efforts to try to solve the conflict .\n",
+              "score": 0
+            },
+            {
+              "question": "Describe a time you led a team through a difficult project.",
+              "answer": "yeah sure recently smart India hackathon competition had happened so there we build a complex task  and ",
+              "score": 0
+            },
+            {
+              "question": "How do you prioritize tasks under tight deadlines?",
+              "answer": "i will",
+              "score": 0
+            },
+            {
+              "question": "Give an example of a time you had to adapt to a major change.",
+              "answer": "absolutely",
+              "score": 0
+            },
+            {
+              "question": "Tell me about a goal you achieved and how you did it.",
+              "answer": "",
+              "score": 0
+            }
+          ],
+          "scores": {
+            "technical": 0.0,
+            "communication": 13.8,
+            "overall": 6.9
+          },
+          "result": "rejected",
+          "feedback": "Strengths: None identified. Weaknesses: Technical concepts need improvement, Answers could be more elaborate. Q1: Score 0% (technical) / 30% (communication). Q2: Score 0% (technical) / 18% (communication). Q3: Score 0% (technical) / 11% (communication). Q4: Score 0% (technical) / 10% (communication). Q5: No answer provided."
+        },
+        {
+          "id": "a5ec4deb-6cc5-4322-8db0-4623f39b1ecf",
+          "date": "2026-02-23T17:33:32.696661",
+          "type": "technical",
+          "questions": [
+            {
+              "question": "How do you approach a problem you've never seen before?",
+              "answer": "First, I will maintain my face and I will recognise our sorry and I will. Sorry. Hotel delete. And see a problem in very basic plan.",
+              "score": 0
+            },
+            {
+              "question": "What is a self join?",
+              "answer": "",
+              "score": 0
+            },
+            {
+              "question": "How do you learn a new programming language or framework quickly?",
+              "answer": "",
+              "score": 0
+            },
+            {
+              "question": "What are lambda functions? When would you use them?",
+              "answer": "",
+              "score": 0
+            },
+            {
+              "question": "Explain the concept of `this` in JavaScript.",
+              "answer": "",
+              "score": 0
+            }
+          ],
+          "scores": {
+            "technical": 6.0,
+            "communication": 15.6,
+            "overall": 9.8,
+            "per_question": [
+              {
+                "technical_score": 30,
+                "communication_score": 78,
+                "feedback": "Good answer. Adding a concrete example or use case would make it stronger."
+              },
+              {
+                "technical_score": 0,
+                "communication_score": 0,
+                "feedback": "No answer was provided. Always attempt every question, even partially."
+              },
+              {
+                "technical_score": 0,
+                "communication_score": 0,
+                "feedback": "No answer was provided. Always attempt every question, even partially."
+              },
+              {
+                "technical_score": 0,
+                "communication_score": 0,
+                "feedback": "No answer was provided. Always attempt every question, even partially."
+              },
+              {
+                "technical_score": 0,
+                "communication_score": 0,
+                "feedback": "No answer was provided. Always attempt every question, even partially."
+              }
+            ]
+          },
+          "result": "rejected",
+          "feedback": "\u2705 You answered 1/5 questions.\n\ud83d\udcc8 Areas to Improve: Focus on explaining technical concepts with more depth and examples.\n\ud83d\udce2 Communication: Try to structure your answers using the STAR method (Situation, Task, Action, Result).\n\nQ1 [Tech: 30% | Comm: 78%]: Good answer. Adding a concrete example or use case would make it stronger.\n\nQ2 [\u274c Not Answered]: No answer was provided. Always attempt every question, even partially.\n\nQ3 [\u274c Not Answered]: No answer was provided. Always attempt every question, even partially.\n\nQ4 [\u274c Not Answered]: No answer was provided. Always attempt every question, even partially.\n\nQ5 [\u274c Not Answered]: No answer was provided. Always attempt every question, even partially.",
+          "duration_seconds": 79
+        },
+        {
+          "id": "d6db75f6-668b-4597-883e-369cbe7c7f9c",
+          "date": "2026-02-24T14:41:14.619180",
+          "type": "technical",
+          "questions": [
+            {
+              "question": "What is the difference between ArrayList and LinkedList?",
+              "answer": "Exactly. Sorry.",
+              "score": 0
+            },
+            {
+              "question": "What is Spring Boot Actuator?",
+              "answer": "",
+              "score": 0
+            },
+            {
+              "question": "Explain HTML forms and their attributes.",
+              "answer": "Yeah, HTML forms are the easiest ways to get the interactive forms and their attributes like.",
+              "score": 0
+            },
+            {
+              "question": "Explain Promises and async/await.",
+              "answer": "",
+              "score": 0
+            },
+            {
+              "question": "What is an aggregate function? Give examples.",
+              "answer": "",
+              "score": 0
+            }
+          ],
+          "scores": {
+            "technical": 12.0,
+            "communication": 10.8,
+            "overall": 11.5,
+            "per_question": [
+              {
+                "technical_score": 0,
+                "communication_score": 6,
+                "feedback": "Very brief answer. Expand your response with examples and technical details."
+              },
+              {
+                "technical_score": 0,
+                "communication_score": 0,
+                "feedback": "No answer was provided. Always attempt every question, even partially."
+              },
+              {
+                "technical_score": 60,
+                "communication_score": 48,
+                "feedback": "Decent start, but the answer needs more depth. Try to explain 'why' and 'how'."
+              },
+              {
+                "technical_score": 0,
+                "communication_score": 0,
+                "feedback": "No answer was provided. Always attempt every question, even partially."
+              },
+              {
+                "technical_score": 0,
+                "communication_score": 0,
+                "feedback": "No answer was provided. Always attempt every question, even partially."
+              }
+            ]
+          },
+          "result": "rejected",
+          "feedback": "\u2705 You answered 2/5 questions.\n\ud83d\udcc8 Areas to Improve: Focus on explaining technical concepts with more depth and examples.\n\ud83d\udce2 Communication: Try to structure your answers using the STAR method (Situation, Task, Action, Result).\n\nQ1 [Tech: 0% | Comm: 6%]: Very brief answer. Expand your response with examples and technical details.\n\nQ2 [\u274c Not Answered]: No answer was provided. Always attempt every question, even partially.\n\nQ3 [Tech: 60% | Comm: 48%]: Decent start, but the answer needs more depth. Try to explain 'why' and 'how'.\n\nQ4 [\u274c Not Answered]: No answer was provided. Always attempt every question, even partially.\n\nQ5 [\u274c Not Answered]: No answer was provided. Always attempt every question, even partially.",
+          "duration_seconds": 84
+        }
+      ],
+      "asked_questions": [
+        "How do you approach a problem you've never seen before?",
+        "What is a self join?",
+        "How do you learn a new programming language or framework quickly?",
+        "What are lambda functions? When would you use them?",
+        "Explain the concept of `this` in JavaScript.",
+        "What is the difference between ArrayList and LinkedList?",
+        "What is Spring Boot Actuator?",
+        "Explain HTML forms and their attributes.",
+        "Explain Promises and async/await.",
+        "What is an aggregate function? Give examples."
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="hero-section text-center py-5">
+    <div class="container">
+        <h1 class="display-4 fw-bold">AI-Powered Recruitment</h1>
+        <p class="lead">Automate interviews, evaluate candidates, and hire smarter with SmartHire AI.</p>
+        {% if not session.user_id %}
+        <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg mt-3">Get Started</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="row g-4 py-5">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-upload fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Resume Upload</h5>
+                <p class="card-text">Candidates upload their PDF resumes; skills are extracted automatically.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-question-circle fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">AI Question Generation</h5>
+                <p class="card-text">Dynamic questions based on detected skills – never the same interview twice.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Instant Evaluation</h5>
+                <p class="card-text">Get scores, strengths, and weaknesses immediately after the interview.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

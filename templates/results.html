@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+{% block title %}Interview Results{% endblock %}
+{% block content %}
+
+{% set overall = interview.scores.overall | default(0) %}
+{% set tech = interview.scores.technical | default(0) %}
+{% set comm = interview.scores.communication | default(0) %}
+
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+
+        <!-- Result Hero Card -->
+        <div class="card shadow mb-4"
+            style="border-top: 4px solid {% if interview.result == 'selected' %}#059669{% else %}#dc2626{% endif %} !important;">
+            <div class="card-body text-center py-4">
+                {% if interview.result == 'selected' %}
+                <span class="badge bg-success" style="font-size:1rem;padding:10px 20px">
+                    <i class="fas fa-trophy me-2"></i>Selected — Well Done, {{ first_name }}!
+                </span>
+                {% else %}
+                <span class="badge bg-danger" style="font-size:1rem;padding:10px 20px">
+                    <i class="fas fa-redo me-2"></i>Keep Practising, {{ first_name }}!
+                </span>
+                {% endif %}
+                <p class="text-muted mb-0 mt-2">
+                    {{ interview.type|capitalize }} Interview &middot; {{ interview.date[:10] }}
+                    &middot; {{ interview.questions | length }} Questions
+                </p>
+            </div>
+        </div>
+
+        <!-- Score Breakdown Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm text-center">
+                    <div class="card-body py-3">
+                        <div class="text-muted small mb-1">Technical</div>
+                        <div class="fw-bold text-primary" style="font-size:2rem">{{ tech | int }}%</div>
+                        <div class="progress mt-2" style="height:6px">
+                            <div class="progress-bar" style="width:{{ tech }}%;background:#4f46e5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm text-center">
+                    <div class="card-body py-3">
+                        <div class="text-muted small mb-1">Communication</div>
+                        <div class="fw-bold text-success" style="font-size:2rem">{{ comm | int }}%</div>
+                        <div class="progress mt-2" style="height:6px">
+                            <div class="progress-bar" style="width:{{ comm }}%;background:#059669"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm text-center">
+                    <div class="card-body py-3">
+                        <div class="text-muted small mb-1">Overall</div>
+                        <div class="fw-bold {% if overall >= 60 %}text-success{% else %}text-danger{% endif %}"
+                            style="font-size:2rem">
+                            {{ overall | int }}%
+                        </div>
+                        <div class="progress mt-2" style="height:6px">
+                            <div class="progress-bar"
+                                style="width:{{ overall }}%;background:{% if overall >= 60 %}#059669{% else %}#dc2626{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+                <canvas id="scoreChart" height="100"></canvas>
+            </div>
+        </div>
+
+        <!-- AI Feedback Summary -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <i class="fas fa-comment-dots me-2 text-primary"></i>AI Feedback Summary
+            </div>
+            <div class="card-body">
+                <div style="white-space:pre-line;line-height:1.9;font-size:0.95rem">{{ interview.feedback }}</div>
+            </div>
+        </div>
+
+        <!-- Per-Question Breakdown -->
+        <div class="card shadow-sm mb-4">
+            <div class="card-header">
+                <i class="fas fa-list-check me-2 text-primary"></i>
+                Question-by-Question Breakdown
+                <span class="badge bg-secondary ms-2">{{ interview.questions | length }} questions</span>
+            </div>
+            <div class="card-body p-0">
+                <div class="accordion" id="qaAccordion">
+                    {% for q in interview.questions %}
+                    {% set has_answer = q.answer and q.answer.strip() %}
+                    {% set pq_exists = interview.scores.per_question is defined
+                    and interview.scores.per_question
+                    and (loop.index0 < (interview.scores.per_question | length)) %} {% if pq_exists %} {% set
+                        pq=interview.scores.per_question[loop.index0] %} {% set q_ts=pq.technical_score | default(0) %}
+                        {% set q_cs=pq.communication_score | default(0) %} {% set q_avg=((q_ts + q_cs) / 2) | int %} {%
+                        set qfeedback=pq.feedback | default('') %} {% else %} {% set q_ts=0 %} {% set q_cs=0 %} {% set
+                        q_avg=0 %} {% set qfeedback='' %} {% endif %} <div class="accordion-item"
+                        style="border-radius:0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#qcollapse{{ loop.index0 }}">
+                                <div class="d-flex align-items-center gap-3 w-100 me-2">
+                                    <span class="badge rounded-circle
+                                    {% if not has_answer %}bg-secondary
+                                    {% elif q_avg >= 60 %}bg-success
+                                    {% elif q_avg >= 35 %}bg-warning text-dark
+                                    {% else %}bg-danger{% endif %}"
+                                        style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:0.8rem">
+                                        {{ loop.index }}
+                                    </span>
+                                    <span class="flex-grow-1" style="font-size:0.9rem;font-weight:500">
+                                        {{ q.question[:85] }}{% if q.question | length > 85 %}...{% endif %}
+                                    </span>
+                                    {% if has_answer %}
+                                    <span class="badge bg-secondary ms-auto" style="white-space:nowrap">{{ q_avg
+                                        }}%</span>
+                                    {% else %}
+                                    <span class="badge bg-danger ms-auto">Not answered</span>
+                                    {% endif %}
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="qcollapse{{ loop.index0 }}" class="accordion-collapse collapse">
+                            <div class="accordion-body" style="background:#fafbff">
+
+                                <div class="mb-3">
+                                    <div class="small text-muted fw-bold text-uppercase mb-1">Full Question</div>
+                                    <div class="p-3 rounded"
+                                        style="background:#f0f4ff;border:1px solid #c7d2fe;font-size:0.9rem">
+                                        {{ q.question }}
+                                    </div>
+                                </div>
+
+                                <div class="mb-3">
+                                    <div class="small text-muted fw-bold text-uppercase mb-1">Your Answer</div>
+                                    {% if has_answer %}
+                                    <div class="p-3 rounded"
+                                        style="background:#fff;border:1px solid #e2e8f0;font-size:0.9rem;white-space:pre-wrap">
+                                        {{ q.answer }}</div>
+                                    {% else %}
+                                    <div class="p-3 rounded text-muted fst-italic"
+                                        style="background:#fff;border:1px solid #e2e8f0">
+                                        No answer was provided for this question.
+                                    </div>
+                                    {% endif %}
+                                </div>
+
+                                {% if pq_exists %}
+                                <div class="row g-2 mb-3">
+                                    <div class="col-6">
+                                        <div class="small text-muted">Technical Score</div>
+                                        <div class="fw-bold text-primary">{{ q_ts | int }}%</div>
+                                        <div class="progress mt-1" style="height:5px">
+                                            <div class="progress-bar" style="width:{{ q_ts }}%;background:#4f46e5">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="small text-muted">Communication Score</div>
+                                        <div class="fw-bold text-success">{{ q_cs | int }}%</div>
+                                        <div class="progress mt-1" style="height:5px">
+                                            <div class="progress-bar" style="width:{{ q_cs }}%;background:#059669">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if qfeedback %}
+                                <div
+                                    style="background:#f0fdf4;border-left:3px solid #059669;border-radius:0 8px 8px 0;padding:10px 14px;font-size:0.875rem;line-height:1.65">
+                                    <i class="fas fa-lightbulb me-1 text-success"></i>{{ qfeedback }}
+                                </div>
+                                {% endif %}
+                                {% endif %}
+
+                            </div>
+                        </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin email -->
+    {% if session.user_role == 'admin' %}
+    <div class="card shadow-sm mb-4">
+        <div class="card-body text-center">
+            <form action="{{ url_for('send_result_email', interview_id=interview.id) }}" method="POST">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-envelope me-2"></i>Send Result Email to Candidate
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- CTA -->
+    <div class="text-center pb-4">
+        {% if interview.result == 'selected' %}
+        <p class="text-success fw-semibold">
+            <i class="fas fa-check-circle me-2"></i>Great work! Try another round to keep sharpening.
+        </p>
+        {% else %}
+        <p class="text-muted">Review the feedback above, study the weak areas, and try again!</p>
+        {% endif %}
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary me-2">
+            <i class="fas fa-redo me-2"></i>Practice Again
+        </a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary">
+            <i class="fas fa-home me-2"></i>Dashboard
+        </a>
+    </div>
+
+</div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var canvas = document.getElementById('scoreChart');
+        if (!canvas) return;
+        var ctx = canvas.getContext('2d');
+        var isDark = document.body.classList.contains('dark-mode');
+        var gridColor = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)';
+        var labelColor = isDark ? '#9ca3af' : '#64748b';
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Technical', 'Communication', 'Overall'],
+                datasets: [{
+                    label: 'Score (%)',
+                    data: [{{ tech | int }}, {{ comm | int }}, {{ overall | int }}],
+        backgroundColor: [
+        'rgba(79,70,229,0.75)',
+        'rgba(5,150,105,0.75)',
+        'rgba(217,119,6,0.75)'
+    ],
+        borderColor: ['#4f46e5', '#059669', '#d97706'],
+        borderWidth: 2,
+        borderRadius: 8,
+        borderSkipped: false
+            }]
+        },
+        options: {
+        plugins: { legend: { display: false } },
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 100,
+                grid: { color: gridColor },
+                ticks: {
+                    color: labelColor,
+                    callback: function (v) { return v + '%'; }
+                }
+            },
+            x: {
+                grid: { display: false },
+                ticks: { color: labelColor }
+            }
+        }
+    }
+    });
+});
+</script>
+
+{% endblock %}

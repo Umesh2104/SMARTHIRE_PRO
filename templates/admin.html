@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Admin Panel{% endblock %}
+{% block content %}
+<h2 class="mb-4">Admin Panel</h2>
+
+<div class="card shadow">
+    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Candidates</h5>
+        <a href="{{ url_for('export_results') }}" class="btn btn-sm btn-success">
+            <i class="fas fa-download"></i> Export CSV
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Skills</th>
+                        <th>Last Score</th>
+                        <th>Result</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cand in candidates %}
+                    <tr>
+                        <td>{{ cand.name }}</td>
+                        <td>{{ cand.email }}</td>
+                        <td>
+                            {% for skill in cand.skills[:3] %}
+                            <span class="badge bg-secondary">{{ skill }}</span>
+                            {% endfor %}
+                            {% if cand.skills|length > 3 %}...{% endif %}
+                        </td>
+                        <td>{{ cand.last_score }}%</td>
+                        <td>
+                            <span
+                                class="badge {% if cand.result == 'selected' %}bg-success{% elif cand.result == 'rejected' %}bg-danger{% else %}bg-secondary{% endif %}">
+                                {{ cand.result|capitalize }}
+                            </span>
+                        </td>
+                        <td>
+                            {% if cand.interview_id %}
+                            <a href="{{ url_for('results', interview_id=cand.interview_id) }}"
+                                class="btn btn-sm btn-outline-primary">View</a>
+                            {% endif %}
+                            <form action="{{ url_for('delete_candidate', user_id=cand.id) }}" method="POST"
+                                class="d-inline" onsubmit="return confirm('Delete this candidate?');">
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
